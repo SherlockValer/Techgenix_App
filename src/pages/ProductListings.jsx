@@ -11,14 +11,15 @@ import Footer from "../components/Footer"
 
 // Contexts
 import useProductDataContext from "../context/productDataContext"
+import useGlobalContext from "../context/globalContext"
 
 // Utilities
 import { starRatingsGenerator } from "../utils/starRatingsGenerator"
 import { discountPercentage } from "../utils/discountPercentageCalc"
 
-// Button
 import { useCart } from "../services/useCart"
 import WishlistButton from "../components/WishlistButton"
+
 
 
 const ProductListings = () => {
