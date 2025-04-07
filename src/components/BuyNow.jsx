@@ -62,12 +62,10 @@ const BuyNow = ({product, quantity}) => {
                 }
             })
             .then(res => res.json())
-            .then(msg => {
-                navigate('/cart')
-            })
+            .then(msg => console.log(msg))
             .catch(error => console.log(error))
 
-
+            navigate('/cart')
     
         }
     
