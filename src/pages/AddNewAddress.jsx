@@ -35,7 +35,12 @@ const AddNewAddress = () => {
                 'content-type' : 'application/json'
             }
         })
-        .then(res => res.json())
+        .then(res => {
+            if(res.ok) {
+                alert("Address Saved Successfully!")
+            }
+            res.json()
+        })
         .then(data => console.log(data))
         .catch(error => console.log(error))
     }
