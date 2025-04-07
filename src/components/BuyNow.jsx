@@ -61,14 +61,14 @@ const BuyNow = ({product, quantity}) => {
                     "content-type": "application/json"
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if(res.ok) {
+                    navigate('/cart')
+                }
+                res.json()
+            })
             .then(msg => console.log(msg))
             .catch(error => console.log(error))
-
-            setTimeout(() => {
-                navigate('/cart')
-            }, 3000)
-
         }
     
 
