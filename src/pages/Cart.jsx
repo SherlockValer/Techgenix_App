@@ -8,11 +8,11 @@ import { Link, useNavigate } from "react-router-dom"
 
 const Cart = () => {
     const [cartData, setCartData] = useState({})
-    const {cartCount, setCartCount, API_URL} = useGlobalContext()
+    const {cartCount, setCartCount, API_URL, user} = useGlobalContext()
     const navigate = useNavigate()
 
     // Fetch Cart details
-    const {cart, cartError} = useCart(`${API_URL}/user/67dce53d2b5635c333cd19df/cart/populate`)
+    const {cart, cartError} = useCart(`${API_URL}/user/${user._id}/cart/populate`)
 
     useEffect(() => {
         setCartData(cart)

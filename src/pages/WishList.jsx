@@ -11,9 +11,9 @@ import { removeFromWishList } from "../utils/removeFromWishList"
 import AddToCart from "../components/AddToCart"
 
 const WishList = () => {
-    const {wishlistCount, setWishlistCount, API_URL} = useGlobalContext()
+    const {wishlistCount, setWishlistCount, API_URL, user} = useGlobalContext()
 
-    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist/populate`)
+    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/${user._id}/wishlist/populate`)
 
     const [wishlistArray, setWishlistArray] = useState([])
 
