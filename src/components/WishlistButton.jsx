@@ -11,12 +11,12 @@ import { removeFromWishList } from "../utils/removeFromWishList"
 
 const WishlistButton = ({product}) => {
     const [wishlistArray, setWishlistArray] = useState([])
-    const {wishlistCount, setWishlistCount, API_URL, user} = useGlobalContext()
+    const {wishlistCount, setWishlistCount, API_URL} = useGlobalContext()
      
 
     //* ------------------- Wishlist --------------------------------
     // Fetch wishlist data
-    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/${user._id}/wishlist`)
+    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist`)
 
     // Set Wishlist Data
     useEffect(() => {

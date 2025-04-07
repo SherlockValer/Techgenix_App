@@ -10,7 +10,7 @@ const Orders = () => {
     const {user, API_URL} = useGlobalContext()
 
     useEffect(() => {
-        fetch(`${API_URL}/${user._id}/orders`)
+        fetch(`${API_URL}/67dce53d2b5635c333cd19df/orders`)
         .then(res => res.json())
         .then(data => setOrders(data))
         .catch(error => setError(error))

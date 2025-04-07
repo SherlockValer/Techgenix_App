@@ -28,7 +28,7 @@ const AddNewAddress = () => {
         console.log(updatedAddresses)
 
 
-        fetch(`${API_URL}/update/${user._id}`, {
+        fetch(`${API_URL}/update/67dce53d2b5635c333cd19df`, {
             method: "POST",
             body: JSON.stringify({addresses: updatedAddresses}),
             headers: {

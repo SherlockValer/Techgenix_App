@@ -21,7 +21,7 @@ const Checkout = () => {
     })
 
     // Fetch Cart details
-    const {cart, cartError} = useCart(`${API_URL}/user/${user._id}/cart/populate`)
+    const {cart, cartError} = useCart(`${API_URL}/user/67dce53d2b5635c333cd19df/cart/populate`)
 
     useEffect(() => {
         setCartData(cart)
@@ -42,7 +42,7 @@ const Checkout = () => {
         setCartData(prevData => ({...prevData, items: [], totalPrice: 0}))
         setCartCount(0)
 
-        fetch(`${API_URL}/user/${user._id}/cart`, {
+        fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
             method: "POST",
             body: JSON.stringify({
                 items: [],
