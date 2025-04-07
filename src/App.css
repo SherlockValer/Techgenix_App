@@ -279,6 +279,26 @@ header button {
     font-family: emberMedium;
 }
 
+@media (max-width: 1080px) {
+    #wishlistGrid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
+    #wishlistGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+}
+
+@media (max-width: 480px) {
+    #wishlistGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
 /* Product Page */
 .MRP {
     color: rgb(161, 160, 160);
