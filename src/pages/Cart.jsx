@@ -71,19 +71,23 @@ const Cart = () => {
 
         setCartData(prevData => ({...prevData, items: updatedCartItems, totalPrice: newTotalPrice}))
 
-        fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
-            method: "POST",
-            body: JSON.stringify({
-                items: updatedCartItems,
-                totalPrice: newTotalPrice
-            }),
-            headers: {
-                "content-type": "application/json"
-            }
-        })
-        .then(res => res.json())
-        .then(msg => alert(msg.message))
-        .catch(error => console.log(error))
+        setTimeout = (() => {
+            fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
+                method: "POST",
+                body: JSON.stringify({
+                    items: updatedCartItems,
+                    totalPrice: newTotalPrice
+                }),
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+            .then(res => res.json())
+            .then(msg => alert(msg.message))
+            .catch(error => console.log(error))
+
+        }, 2000)
+
     }
 
     const shoppingButtonHandler = () => {
