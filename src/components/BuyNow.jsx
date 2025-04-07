@@ -65,7 +65,7 @@ const BuyNow = ({product, quantity}) => {
                 if(res.ok) {
                     navigate('/cart')
                 }
-                res.json()
+                return res.json()
             })
             .then(msg => console.log(msg))
             .catch(error => console.log(error))
