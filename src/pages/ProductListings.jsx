@@ -2,6 +2,10 @@
 import { use, useEffect, useRef, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 
+// Assets
+import favoriteIcon from "../assets/favorite.svg"
+import favoriteFilledIcon from "../assets/favorite_filled.svg"
+
 // Hooks
 import { categories, subCategoriesGenerator } from "../hooks/useCategories"
 
