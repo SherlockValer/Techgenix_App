@@ -24,7 +24,7 @@ export const GlobalContextProvider = ({children}) => {
     }, [wishlistData])
 
     // Fetch Cart Data
-    const {cart, cartError} = useCart(`${API_URL}/user/${user._id}/cart`)
+    const {cart, cartError} = useCart(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`)
 
     useEffect(() => {
         if(cart.items) {
