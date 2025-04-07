@@ -19,7 +19,7 @@ const Header = () => {
     const [searchQuery, setQuery] = useState("")
     const [searchResult, setResult] = useState([])
     const [showResult, setShow] = useState(false)
-    const [error, setError] = useState('')
+    const [error, setError] = useState(null)
 
     // useLocation to locate homepage
     const location = useLocation()
