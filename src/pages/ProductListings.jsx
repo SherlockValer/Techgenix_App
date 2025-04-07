@@ -16,10 +16,11 @@ import useGlobalContext from "../context/globalContext"
 // Utilities
 import { starRatingsGenerator } from "../utils/starRatingsGenerator"
 import { discountPercentage } from "../utils/discountPercentageCalc"
+import { removeFromWishList } from "../utils/removeFromWishList"
+import { addToWishList } from "../utils/addToWishList"
 
+// Services
 import { useCart } from "../services/useCart"
-import WishlistButton from "../components/WishlistButton"
-
 
 
 const ProductListings = () => {
@@ -37,8 +38,12 @@ const ProductListings = () => {
     })
     const [currentRating, setRating] = useState(4)
     const [currentSortBy, setSortBy] = useState("HTL")
+
     const [cartData, setCartData] = useState({})
     const {cartCount, setCartCount, API_URL} = useGlobalContext()
+
+    const [wishlistArray, setWishlistArray] = useState([])
+    const {wishlistCount, setWishlistCount} = useGlobalContext()
 
 
     //* -------------------- Filters -----------------------------
@@ -110,7 +115,7 @@ const ProductListings = () => {
     }, [currentCategory, currentSubCategories, currentRating, currentSortBy])
 
 
-    //* Cart
+    //* ---------------------- Cart -------------------------
     // Fetch Cart details
     const {cart, cartError} = useCart(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`)
 
@@ -168,7 +173,26 @@ const ProductListings = () => {
 
     }
     
+    //* ------------------- Wishlist --------------------------------
+    // Fetch wishlist data
+    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist`)
 
+    // Set Wishlist Data
+    useEffect(() => {
+        setWishlistArray(wishlistData)
+    }, [wishlistData])
+
+    const handleWishlist = (productId) => {
+        if(wishlistArray.includes(productId)) {
+            setWishlistArray(prevData => prevData.filter(id => id !== productId ))
+            removeFromWishList(productId)
+            setWishlistCount(count => count -1)
+        } else {
+            setWishlistArray(prevData => [...prevData, productId])
+            addToWishList(productId)
+            setWishlistCount(count => count + 1)
+        }
+    }
 
 
 
@@ -271,7 +295,9 @@ const ProductListings = () => {
                                 {filteredData.map(product => (
                                     <div key={product._id} className="productCard">
                                         {/* Wishlist button */}
-                                        <WishlistButton product={product} />
+                                        <button onClick={() => handleWishlist(product._id)} type="button" className="wishlistBtn" >
+                                            <img src={wishlistArray.includes(product._id)? favoriteFilledIcon : favoriteIcon} alt="" />
+                                        </button>
                                         {/* Image */}
                                         <img loading="lazy"  src={product.image} alt="" />
                                         {/* Title */}
