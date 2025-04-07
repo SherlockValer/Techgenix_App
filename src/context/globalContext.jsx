@@ -16,7 +16,7 @@ export const GlobalContextProvider = ({children}) => {
     const API_URL = import.meta.env.VITE_API_URL
 
     // Fetch wishlist data
-    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist`)
+    const {data: wishlistData, error:wishlistError} = useWishlist(`${API_URL}/user/${user._id}/wishlist`)
 
     // Set Wishlist Data
     useEffect(() => {
@@ -24,7 +24,7 @@ export const GlobalContextProvider = ({children}) => {
     }, [wishlistData])
 
     // Fetch Cart Data
-    const {cart, cartError} = useCart(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`)
+    const {cart, cartError} = useCart(`${API_URL}/user/${user._id}/cart`)
 
     useEffect(() => {
         if(cart.items) {
