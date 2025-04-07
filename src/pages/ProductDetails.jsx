@@ -69,7 +69,7 @@ const ProductDetails = () => {
                         <div className="col-md-3 d-flex flex-column mb-3">
                             <WishlistButton product={details} />
                             <img style={{height: "280px", objectFit:"contain"}} className="img-fluid" src={details.image} alt="" />
-                            <BuyNow product={details} />
+                            <BuyNow product={details} quantity={quantity} />
                             <AddToCart  product={details} quantity={quantity} />
                         </div>
                         <div className="col-md-8">
