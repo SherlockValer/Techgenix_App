@@ -7,10 +7,10 @@ import useGlobalContext from "../context/globalContext"
 const Orders = () => {
     const [orders, setOrders] = useState([])
     const [error, setError] = useState({})
-    const {API_URL} = useGlobalContext()
+    const {user, API_URL} = useGlobalContext()
 
     useEffect(() => {
-        fetch(`${API_URL}/67dce53d2b5635c333cd19df/orders`)
+        fetch(`${API_URL}/${user._id}/orders`)
         .then(res => res.json())
         .then(data => setOrders(data))
         .catch(error => setError(error))

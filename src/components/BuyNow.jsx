@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom"
 
 const BuyNow = ({product, quantity}) => {
         const [cartData, setCartData] = useState({})
-        const {cartCount, setCartCount, API_URL} = useGlobalContext()
+        const {cartCount, setCartCount, API_URL, user} = useGlobalContext()
 
         const navigate = useNavigate()
 
         // Fetch Cart details
-        const {cart, cartError} = useCart(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`)
+        const {cart, cartError} = useCart(`${API_URL}/user/${user._id}/cart`)
     
         useEffect(() => {
             setCartData(cart)
@@ -51,7 +51,7 @@ const BuyNow = ({product, quantity}) => {
             }
             setCartCount(total)
     
-            fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
+            fetch(`${API_URL}/user/${user._id}/cart`, {
                 method: "POST",
                 body: JSON.stringify({
                     items: newItems,

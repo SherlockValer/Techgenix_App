@@ -1,5 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL
 
+
 export const addToWishList = async(productid) => {
     try {
         const response = await fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist`,

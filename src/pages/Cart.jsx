@@ -30,7 +30,7 @@ const Cart = () => {
         }
         setCartCount(total)
 
-        fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
+        fetch(`${API_URL}/user/${user._id}/cart`, {
             method: "POST",
             body: JSON.stringify({
                 items: filteredItems,
@@ -71,7 +71,7 @@ const Cart = () => {
 
         setCartData(prevData => ({...prevData, items: updatedCartItems, totalPrice: newTotalPrice}))
 
-        fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
+        fetch(`${API_URL}/user/${user._id}/cart`, {
             method: "POST",
             body: JSON.stringify({
                 items: updatedCartItems,
