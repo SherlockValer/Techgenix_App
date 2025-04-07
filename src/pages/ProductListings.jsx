@@ -133,17 +133,9 @@ const ProductListings = () => {
         const ifItemInCart = cartData.items.find(product => product.productId === productId)
         let itemQuantity = 0
         if(ifItemInCart !== undefined) {
-            if(quantity) {
-                itemQuantity = ifItemInCart.quantity + quantity
-            } else {
-                itemQuantity = ifItemInCart.quantity + 1
-            }
+            itemQuantity = ifItemInCart.quantity + 1
         } else {
-            if(quantity) {
-                itemQuantity = quantity
-            } else {
-                itemQuantity = 1
-            }
+            itemQuantity = 1
         }
 
         const newItem = {productId: productId, quantity: itemQuantity, price: parseInt(price)}
