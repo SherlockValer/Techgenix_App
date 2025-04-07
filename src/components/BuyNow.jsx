@@ -64,7 +64,7 @@ const BuyNow = ({product, quantity}) => {
             .then(res => {
                 if(res.ok) {
                     navigate('/cart')
-                    window.location.reload
+                    window.location.reload()
                 }
                 return res.json()
             })
