@@ -1,10 +1,12 @@
 
-
 export const starRatingsGenerator = (rating) => {
     const fullStars = Math.floor(rating)
-    const halfStars = rating - fullStars > 0 ? 1 : 0
-    const noStars = 5 - (fullStars + halfStars)
 
-    const totalRating = "★".repeat(fullStars) + "⯪".repeat(halfStars) + "☆".repeat(noStars)
+    const noStars = 5 - (fullStars)
+
+    const totalRating = "★".repeat(fullStars) +  "☆".repeat(noStars)
     return totalRating
 }
+
+// const halfStars = rating - fullStars > 0 ? 1 : 0
+// "⯪".repeat(halfStars) 

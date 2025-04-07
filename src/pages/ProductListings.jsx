@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom"
 // Assets
 import favoriteIcon from "../assets/favorite.svg"
 import favoriteFilledIcon from "../assets/favorite_filled.svg"
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 // Hooks
 import { categories, subCategoriesGenerator } from "../hooks/useCategories"
@@ -312,7 +313,7 @@ const ProductListings = () => {
                                             {product.discountPrice ? parseInt(product.discountPrice).toLocaleString() : parseInt(product.actualPrice).toLocaleString()}
                                         </h5>
                                         <p >
-                                            <span className="text-success fw-medium fs-6">🡫 {product.discountPrice ? discountPercentage(product.actualPrice, product.discountPrice) : null }%</span>
+                                            <span className="text-success fw-medium fs-6"><ArrowDownwardIcon sx={{ fontSize: '1.2em' }} />{product.discountPrice ? discountPercentage(product.actualPrice, product.discountPrice) : null }%</span>
                                             <sub className="subScript ms-1">
                                                 M.R.P: {product.actualPrice ? parseInt(product.actualPrice).toLocaleString(): "Product Unavailable"}
                                             </sub>

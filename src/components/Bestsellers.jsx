@@ -3,6 +3,8 @@ import AddToCart from "./AddToCart"
 import { starRatingsGenerator } from "../utils/starRatingsGenerator"
 import { discountPercentage } from "../utils/discountPercentageCalc"
 import { Link } from "react-router-dom"
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 
 const bestSellers = [
     {
@@ -80,7 +82,7 @@ const BestSellers = () => {
                     {product.discountPrice ? parseInt(product.discountPrice).toLocaleString() : parseInt(product.actualPrice).toLocaleString()}
                 </h5>
                 <p >
-                    <span className="text-success fw-medium fs-6">🡫 {product.discountPrice ? discountPercentage(product.actualPrice, product.discountPrice) : null }%</span>
+                    <span className="text-success fw-medium fs-6"><ArrowDownwardIcon sx={{ fontSize: '1.2em' }} />{product.discountPrice ? discountPercentage(product.actualPrice, product.discountPrice) : null }%</span>
                     <sub className="subScript ms-1">
                         M.R.P: {product.actualPrice ? parseInt(product.actualPrice).toLocaleString(): "Product Unavailable"}
                     </sub>
