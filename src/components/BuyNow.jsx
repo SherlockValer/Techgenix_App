@@ -66,6 +66,7 @@ const BuyNow = ({product, quantity}) => {
             .catch(error => console.log(error))
 
             navigate('/cart')
+            window.location.reload()
     
         }
     
