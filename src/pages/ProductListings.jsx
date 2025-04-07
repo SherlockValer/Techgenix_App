@@ -21,6 +21,7 @@ import { addToWishList } from "../utils/addToWishList"
 
 // Services
 import { useCart } from "../services/useCart"
+import { useWishlist } from "../services/useWishlist"
 
 
 const ProductListings = () => {
