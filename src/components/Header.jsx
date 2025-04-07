@@ -74,7 +74,7 @@ const Header = () => {
                         {!showResult &&
                             <SearchIcon onClick={searchBtnHandler} color="action" fontSize="small"/>
                         }
-                        {showResult || error &&
+                        {(showResult || error) &&
                             <button className="close-btn me-0 py-0" onClick={handleCloseSearch}><CloseIcon sx={{ color: grey[500] }}/></button>
                         }
                         {showResult && searchResult.length !==0 && 
