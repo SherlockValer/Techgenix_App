@@ -65,8 +65,10 @@ const BuyNow = ({product, quantity}) => {
             .then(msg => console.log(msg))
             .catch(error => console.log(error))
 
-            navigate('/cart')
-    
+            setTimeout(() => {
+                navigate('/cart')
+            }, 3000)
+
         }
     
 
