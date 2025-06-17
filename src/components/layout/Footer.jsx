@@ -22,7 +22,7 @@ const Footer = () => {
             <p className="mb-0">Bengaluru, Karnataka - 560001</p>
             <p>India</p>
             <p>tech.genix@gmail.com</p>
-            <p>+91 0000000000</p>
+            <p>+91 9876543210</p>
           </div>
 
           <div>
