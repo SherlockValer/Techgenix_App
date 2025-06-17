@@ -129,5 +129,4 @@ export const categories = [
 export const subCategoriesGenerator = (name) => {
     const found = categories.find(category => category.category === name)
     return found.subcategories
-    console.log(found)
 }

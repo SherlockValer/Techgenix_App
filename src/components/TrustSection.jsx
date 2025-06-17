@@ -1,8 +1,7 @@
-import LocalShippingIcon from "@mui/icons-material/LocalShipping"
-import VerifiedIcon from "@mui/icons-material/Verified"
-import AutorenewIcon from "@mui/icons-material/Autorenew"
-import SupportAgentIcon from "@mui/icons-material/SupportAgent"
-
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 
 const trustFeatures = [
   {
@@ -25,19 +24,23 @@ const trustFeatures = [
     title: "24/7 Customer Support",
     desc: "We're here to help—day or night, anytime.",
   },
-]
+];
 
 const TrustSection = () => {
   return (
-    <section className="trust-section py-5 bg-light">
+    <section className="trust-section py-5 ">
       <div className="container">
-        <h2 className="text-center fw-bold mb-5">Why Shop With Us</h2>
-        <div className="row text-center">
+        <h2 className="mb-3 fw-bold fs-5 text-danger">Why Shop With Us</h2>
+        <div
+          style={{ width: "13rem", height: "2px", backgroundColor: "#dc3545" }}
+        ></div>
+
+        <div className="row text-center my-5">
           {trustFeatures.map((feature, index) => (
             <div key={index} className="col-6 col-md-3 mb-4">
               <div className="trust-card p-3 h-100">
                 {feature.icon}
-                <h5 className="fw-semibold">{feature.title}</h5>
+                <h5 className="fw-semibold fs-6">{feature.title}</h5>
                 <p className="small text-muted">{feature.desc}</p>
               </div>
             </div>
@@ -45,7 +48,7 @@ const TrustSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default TrustSection
+export default TrustSection;

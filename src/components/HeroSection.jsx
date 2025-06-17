@@ -1,24 +1,69 @@
-import { Link } from "react-router-dom"
 
 const HeroSection = () => {
   return (
     <section className="hero-section d-flex align-items-center text-white">
-      <div className="container text-center">
-        <h2 className="fw-bold">Powering the Future, One Gadget at a Time.</h2>
-        <p className="lead mb-4">
-          Explore the latest in smart tech and futuristic gadgets at unbeatable prices.
-        </p>
-        <div>
-          <Link to={'/products/Smartphones'} className="btn btn-primary me-3">
-            Shop Now
-          </Link>
-          <a href="#menuList" className="btn btn-outline-light">
-            Explore Categories
-          </a>
+
+      <div id="carouselExampleIndicators" className="carousel slide">
+        <div className="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            className="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
         </div>
+        <div className="carousel-inner">
+          <div className="carousel-item active card">
+            <img src="iph.jpeg" className="d-block w-100 banner" alt="..." />
+          </div>
+          <div className="carousel-item">
+            <img src="rog.webp" className="d-block w-100 banner" alt="..." />
+          </div>
+          <div className="carousel-item">
+            <img src="watch7.jpg" className="d-block w-100 banner" alt="..." />
+          </div>
+        </div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;
