@@ -156,7 +156,7 @@ VITE_API_BASE_URL=https://techgenix-server.vercel.app
 ## 🧩 Backend Repository
 
 To run the full stack, use the backend here:  
-🔗 [TechGenix Backend GitHub Repo](https://github.com/YourUsername/Techgenix_Backend)
+🔗 [TechGenix Backend GitHub Repo](https://github.com/SherlockValer/Techgenix_Server)
 
 
 ---
