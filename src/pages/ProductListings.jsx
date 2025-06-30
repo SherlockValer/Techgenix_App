@@ -13,22 +13,23 @@ import { categories, subCategoriesGenerator } from "../hooks/useCategories";
 
 // Contexts
 import useProductDataContext from "../context/productDataContext";
-import useGlobalContext from "../context/globalContext";
 
 // Utilities
 import { starRatingsGenerator } from "../utils/starRatingsGenerator";
 import { discountPercentage } from "../utils/discountPercentageCalc";
 
 // Services
-import { useCart } from "../hooks/useCart.js";
-import { useWishlist } from "../hooks/useWishlist.js";
+import { useCartContext } from "../context/CartContext.jsx";
+import { useWishlistContext } from "../context/WishlistContext.jsx";
+import WishlistButton from "../components/common/WishlistButton.jsx";
+import AddToCart from "../components/common/AddToCart.jsx";
 
 const ProductListings = () => {
   // Fetch all data
   const { allProducts, productsLoading, productsError } =
     useProductDataContext();
-
-  const { cart, cartError, handleCartButton } = useCart();
+  const { cartCount, handleCartButton } = useCartContext();
+  const { wishlist, wishlistCount } = useWishlistContext();
 
   //* State Management
 
@@ -39,9 +40,6 @@ const ProductListings = () => {
   });
   const [currentRating, setRating] = useState(4);
   const [currentSortBy, setSortBy] = useState("HTL");
-
-  const { cartCount, wishlist, wishlistCount, setWishlistCount } =
-    useGlobalContext();
 
   //* -------------------- Filters -----------------------------
 
@@ -114,10 +112,6 @@ const ProductListings = () => {
           );
     setFilteredData(sorted);
   }, [currentCategory, currentSubCategories, currentRating, currentSortBy]);
-
-  //* ------------------- Wishlist --------------------------------
-  // Fetch wishlist data
-  const { handleWishlist } = useWishlist();
 
   return (
     <>
@@ -226,7 +220,7 @@ const ProductListings = () => {
                       <div className="categoryDiv mb-3">
                         <p className="mb-3 fw-semibold text-danger">Rating</p>
                         {[4, 3, 2, 1].map((num) => (
-                          <p className="mb-0">
+                          <p className="mb-0" key={num}>
                             <input
                               onChange={(e) => setRating(e.target.value)}
                               type="radio"
@@ -284,14 +278,8 @@ const ProductListings = () => {
                         return (
                           <div key={product._id} className="productCard">
                             {/* Wishlist button */}
+                            <WishlistButton product={product} />
 
-                            <button
-                              onClick={() => handleWishlist(product._id)}
-                              type="button"
-                              className="wishlistBtn"
-                            >
-                              <img src={heart} alt="" />
-                            </button>
 
                             {/* Image */}
 
@@ -353,20 +341,7 @@ const ProductListings = () => {
                             </p>
 
                             {/* Add to Cart Button */}
-
-                            <button
-                              onClick={() =>
-                                handleCartButton(
-                                  product._id,
-                                  product.discountPrice
-                                    ? product.discountPrice
-                                    : product.actualPrice
-                                )
-                              }
-                              className="btn btn-danger cartBtn"
-                            >
-                              Add to Cart
-                            </button>
+                            <AddToCart product={product} />
                           </div>
                         );
                       })}

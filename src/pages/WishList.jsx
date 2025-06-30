@@ -1,16 +1,19 @@
-import useGlobalContext from "../context/globalContext";
 import favoriteFilledIcon from "../assets/favorite_filled.svg";
 import { starRatingsGenerator } from "../utils/starRatingsGenerator";
 import { discountPercentage } from "../utils/discountPercentageCalc";
-import { useWishlist } from "../hooks/useWishlist.js";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import AddToCart from "../components/common/AddToCart";
 
-const WishList = () => {
-  const { wishlistCount, wishlist } = useGlobalContext();
+import { useWishlistContext } from "../context/WishlistContext.jsx";
 
-  const { wishlistError, wishlistLoading, handleWishlist } = useWishlist();
+const WishList = () => {
+  const {
+    wishlistCount,
+    wishlist,
+    wishlistLoading,
+    handleWishlist,
+  } = useWishlistContext();
 
   return (
     <>
@@ -42,11 +45,12 @@ const WishList = () => {
               {wishlist &&
                 wishlist.map((product) => (
                   <div key={product._id} className="wishlist-card">
-
                     {/* Wishlist button */}
-                    
+
                     <button
-                      onClick={() => handleWishlist(product._id)}
+                      onClick={() => {
+                        handleWishlist(product._id);
+                      }}
                       type="button"
                       className="wishlistBtn"
                     >
@@ -102,7 +106,9 @@ const WishList = () => {
                       </sub>
                     </p>
                     {/* Add to Cart Button */}
-                    <AddToCart product={product} />
+                    <AddToCart
+                      product={product}
+                    />
                   </div>
                 ))}
             </div>

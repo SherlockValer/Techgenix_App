@@ -1,7 +1,7 @@
-import { useCart } from "../../hooks/useCart.js";
+import { useCartContext } from "../../context/CartContext.jsx";
 
 const AddToCart = ({ product, quantity }) => {
-  const { handleCartButton } = useCart();
+  const { handleCartButton } = useCartContext();
 
   return (
     <>

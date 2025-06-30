@@ -6,6 +6,7 @@ const IndianStatesSelect = ({ state, setState }) => {
       className="form-select"
       onChange={(e) => setState(e.target.value)}
       value={state}
+      required
     >
       <option>State</option>
       <option value="AN">Andaman and Nicobar Islands</option>

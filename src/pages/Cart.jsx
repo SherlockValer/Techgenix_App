@@ -1,4 +1,4 @@
-import { useCart } from "../hooks/useCart.js";
+import { useCartContext } from "../context/CartContext.jsx";
 import { discountPercentage } from "../utils/discountPercentageCalc";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,11 +9,10 @@ const Cart = () => {
   const {
     cart,
     cartLoading,
-    cartError,
     cartCount,
     quantityChangeHandler,
     deleteItemHandler,
-  } = useCart();
+  } = useCartContext();
 
   const shoppingButtonHandler = () => {
     navigate("/");
@@ -30,7 +29,7 @@ const Cart = () => {
         </div>
       )}
 
-      {!cartLoading && cart && (
+      {!cartLoading && cart?.length !== 0 && (
         <>
           <main className="container my-3">
             <h4 className="mb-3 fw-bold fs-5 text-danger mb-3">
@@ -61,7 +60,7 @@ const Cart = () => {
                     </div>
 
                     {cart?.items?.map((item) => (
-                      <div>
+                      <div key={item.productId._id}>
                         <div className="row p-2 gap-2 justify-content-center position-relative">
                           <div className="col-2 col-md-2 d-flex justify-content-center align-items-center">
                             <img

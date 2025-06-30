@@ -53,6 +53,7 @@ const bestSellers = [
 ];
 
 const BestSellers = () => {
+
   return (
     <section className="best-sellers py-5">
       <div>
@@ -61,11 +62,9 @@ const BestSellers = () => {
           style={{ width: "9rem", height: "2px", backgroundColor: "#dc3545" }}
         ></div>
 
-
         <div className="bestsellerList my-5">
           {bestSellers.map((product) => (
             <div key={product._id} className="bestseller-card">
-
               {/* Wishlist button */}
 
               <WishlistButton product={product} />
@@ -88,7 +87,7 @@ const BestSellers = () => {
                   {product.name}
                 </Link>
               </p>
-              
+
               {/* Ratings */}
 
               <p className="mb-0">
@@ -126,8 +125,10 @@ const BestSellers = () => {
               </p>
 
               {/* Add to Cart Button */}
-              
-              <AddToCart product={product} />
+
+              <AddToCart
+                product={product}
+              />
             </div>
           ))}
         </div>

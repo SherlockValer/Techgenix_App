@@ -10,8 +10,11 @@ import { MdAccountCircle, MdOutlineShoppingCart } from "react-icons/md";
 import { HiShoppingBag } from "react-icons/hi";
 import { BsSearch, BsXLg } from "react-icons/bs";
 
-import useGlobalContext from "../../context/globalContext";
 import { toast } from "react-toastify";
+
+import useGlobalContext from "../../context/globalContext";
+import { useCartContext } from "../../context/CartContext.jsx";
+import { useWishlistContext } from "../../context/WishlistContext.jsx";
 
 const Header = () => {
   const [searchQuery, setQuery] = useState("");
@@ -22,8 +25,10 @@ const Header = () => {
   // useNavigate to go to a location
   const navigate = useNavigate();
 
-  const { wishlistCount, cartCount, setCartCount, API_URL } =
-    useGlobalContext();
+  const { API_URL } = useGlobalContext();
+
+  const { cartCount } = useCartContext();
+  const { wishlistCount } = useWishlistContext();
 
   // Fetch Search Data
   const searchBtnHandler = () => {
@@ -122,7 +127,7 @@ const Header = () => {
             </button>
 
             <button type="button">
-              <NavLink to="/wishlist">
+              <NavLink to="/wishlist" reloadDocument>
                 <FaRegHeart className="fs-5" />
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger font-xs">
                   {wishlistCount}
@@ -132,7 +137,7 @@ const Header = () => {
             </button>
 
             <button type="button">
-              <NavLink to="/cart">
+              <NavLink to="/cart" reloadDocument>
                 <MdOutlineShoppingCart className="fs-5" />
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger font-xs">
                   {cartCount}

@@ -1,14 +1,35 @@
-import { useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useGlobalContext from "../context/globalContext";
 
-export const useCart = () => {
+const CartContext = createContext();
+
+export const useCartContext = () => useContext(CartContext);
+
+export function CartContextProvider({ children }) {
   const API_URL = import.meta.env.VITE_API_URL;
-  const { cartCount, setCartCount } = useGlobalContext();
 
   const [cart, setCart] = useState([]);
-  const [cartLoading, setCartLoading] = useState(false)
+  const [cartLoading, setCartLoading] = useState(false);
   const [cartError, setError] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
+
+  // fetch cart data
+  useEffect(() => {
+    setCartLoading(true);
+
+    fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart/populate`, {
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((cartData) => {
+        setCart(cartData);
+        cartCounter(cartData.items);
+      })
+      .catch((error) => setError(error.error))
+      .finally(() => {
+        setCartLoading(false);
+      });
+  }, []);
 
   function cartCounter(items) {
     let total;
@@ -20,14 +41,14 @@ export const useCart = () => {
 
   function totalPriceCounter(items) {
     let total;
-    total = items.reduce((acc, curr) => acc + (curr.quantity * curr.price), 0 )
+    total = items.reduce((acc, curr) => acc + curr.quantity * curr.price, 0);
     return total;
   }
 
- function updateCart(items, totalPrice) {
+  function updateCart(items, totalPrice) {
     fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart`, {
       method: "POST",
-      mode: 'cors',
+      mode: "cors",
       body: JSON.stringify({
         items,
         totalPrice,
@@ -37,29 +58,16 @@ export const useCart = () => {
       },
     })
       .then((res) => res.json())
-      .then((msg) => toast.success(msg.message))
+      .then((msg) => {
+        // setRefetch(toggle => !toggle)
+        toast.success(msg.message);
+      })
       .catch((error) => console.log(error));
   }
 
-  useEffect(() => {
-    setCartLoading(true)
-
-    fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/cart/populate`, {
-      mode: 'cors'
-    })
-      .then((res) => res.json())
-      .then((cartData) => {
-        setCart(cartData);
-        cartCounter(cartData.items);
-      })
-      .catch((error) => setError(error.error))
-      .finally(() => setCartLoading(false));
-  }, []);
-
-
   // Add to Cart
 
-  function handleCartButton (productId, price, quantity) {
+  function handleCartButton(productId, price, quantity) {
     const ifItemInCart = cart?.items?.find(
       (product) => product.productId._id === productId
     );
@@ -98,11 +106,11 @@ export const useCart = () => {
 
     cartCounter(newItems);
     updateCart(newItems, newTotalPrice);
-  };
+  }
 
   // Change quantity
 
-  function quantityChangeHandler (productId, change) {
+  function quantityChangeHandler(productId, change) {
     const selectedProduct = cart.items.find(
       (item) => item.productId._id === productId
     );
@@ -128,11 +136,11 @@ export const useCart = () => {
 
     cartCounter(updatedCartItems);
     updateCart(updatedCartItems, newTotalPrice);
-  };
+  }
 
   // Delete Items from Cart
 
-  function deleteItemHandler (productId, price, quantity) {
+  function deleteItemHandler(productId, price, quantity) {
     const filteredItems = cart.items.filter(
       (item) => item.productId._id !== productId
     );
@@ -145,17 +153,23 @@ export const useCart = () => {
     }));
 
     cartCounter(filteredItems);
-    updateCart(filteredItems, newTotal)
+    updateCart(filteredItems, newTotal);
   }
 
-
-  return {
+  const value = {
     cart,
     cartLoading,
     cartError,
     cartCount,
+    setCartLoading,
+    setCartCount,
+    setCart,
+    setError,
+    cartCounter,
     handleCartButton,
     quantityChangeHandler,
-    deleteItemHandler
+    deleteItemHandler,
   };
-};
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}

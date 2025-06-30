@@ -30,7 +30,7 @@ const useFetch = (apiUrl, type) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [apiUrl]);
+  }, []);
 
   return { data, loading, error };
 };

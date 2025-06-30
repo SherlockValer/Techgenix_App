@@ -8,5 +8,3 @@ export const starRatingsGenerator = (rating) => {
     return totalRating
 }
 
-// const halfStars = rating - fullStars > 0 ? 1 : 0
-// "⯪".repeat(halfStars) 

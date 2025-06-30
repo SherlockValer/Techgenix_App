@@ -23,7 +23,7 @@ const CategoriesSection = () => {
       </div>
       <div className="d-flex gap-4 flex-wrap mt-5">
         {categories.map((cat) => (
-          <Link to={`/products/${cat.name}`}>
+          <Link to={`/products/${cat.name}`} key={cat.name}>
             <div className="d-flex flex-column gap-2 align-items-start menuListItem">
               <img src={cat.image} alt={cat.name} />
               <p>{cat.name}</p>

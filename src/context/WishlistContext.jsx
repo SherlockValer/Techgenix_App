@@ -1,18 +1,23 @@
-import { useState, useEffect } from "react";
-import useGlobalContext from "../context/globalContext";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export const useWishlist = () => {
-  const [refetch, setRefetch] = useState(false);
-  const { setWishlistCount, wishlist, setWishlist, API_URL } = useGlobalContext();
+const WishlistContext = createContext();
+export const useWishlistContext = () => useContext(WishlistContext);
+
+export function WishlistContextProvider({ children }) {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [wishlistError, setWishlistError] = useState(null);
-  const [wishlistLoading, setWishlistLoading] = useState(false)
+  const [wishlistLoading, setWishlistLoading] = useState(false);
+  const [wishlist, setWishlist] = useState([]);
+  const [wishlistCount, setWishlistCount] = useState(0);
+  const [refetch, setRefetch] = useState(false);
 
   useEffect(() => {
-    setWishlistLoading(true)
+    setWishlistLoading(true);
 
     fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist/populate`, {
-        mode: 'cors'
+      mode: "cors",
     })
       .then((res) => res.json())
       .then((data) => {
@@ -21,14 +26,13 @@ export const useWishlist = () => {
       })
       .catch((error) => setWishlistError(error.error))
       .finally(() => {
-        setRefetch(false)
-        setWishlistLoading(false)
+        setWishlistLoading(false);
       });
   }, [refetch]);
 
   function addToWishList(productid) {
     fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist`, {
-        mode: 'cors',
+      mode: "cors",
       method: "POST",
       body: JSON.stringify({ id: productid }),
       headers: {
@@ -36,21 +40,27 @@ export const useWishlist = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.message))
+      .then((data) => {
+        toast.success(data.message);
+        setRefetch((toggle) => !toggle);
+      })
       .catch((error) => toast.error(error));
   }
 
   function removeFromWishList(productid) {
     fetch(`${API_URL}/user/67dce53d2b5635c333cd19df/wishlist/del`, {
       method: "POST",
-      mode: 'cors',
+      mode: "cors",
       body: JSON.stringify({ id: productid }),
       headers: {
         "content-type": "application/json",
       },
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.message))
+      .then((data) => {
+        toast.success(data.message);
+        setRefetch((toggle) => !toggle);
+      })
       .catch((error) => toast.error(error));
   }
 
@@ -62,9 +72,25 @@ export const useWishlist = () => {
     } else {
       addToWishList(productId);
     }
-
-    setRefetch(true);
   };
 
-  return { handleWishlist, wishlistLoading, wishlistError };
-};
+  const values = {
+    refetch,
+    wishlist,
+    wishlistCount,
+    wishlistLoading,
+    wishlistError,
+    setWishlist,
+    setWishlistCount,
+    setWishlistLoading,
+    setWishlistError,
+    setRefetch,
+    handleWishlist,
+  };
+
+  return (
+    <WishlistContext.Provider value={values}>
+      {children}
+    </WishlistContext.Provider>
+  );
+}

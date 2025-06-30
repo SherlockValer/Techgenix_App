@@ -69,7 +69,7 @@ const NewAddressForm = ({ whichAddress, orderDetails, setOrderDetails, setNewAdd
               type="text"
               placeholder="First Name"
               className="form-control "
-              value={user.name}
+              defaultValue={user.name}
               disabled
             />
             <input
@@ -85,7 +85,7 @@ const NewAddressForm = ({ whichAddress, orderDetails, setOrderDetails, setNewAdd
               type="email"
               placeholder="Email Address"
               className="form-control "
-              value={user.email}
+              defaultValue={user.email}
               disabled
             />
           </div>
@@ -97,6 +97,7 @@ const NewAddressForm = ({ whichAddress, orderDetails, setOrderDetails, setNewAdd
               className="form-control "
               onChange={(e) => setLabel(e.target.value)}
               value={label}
+              required
             />
           </div>
 
@@ -107,6 +108,7 @@ const NewAddressForm = ({ whichAddress, orderDetails, setOrderDetails, setNewAdd
               className="form-control "
               onChange={(e) => setStreet(e.target.value)}
               value={street}
+              required
             />
           </div>
 
@@ -117,6 +119,7 @@ const NewAddressForm = ({ whichAddress, orderDetails, setOrderDetails, setNewAdd
               className="form-control "
               onChange={(e) => setCity(e.target.value)}
               value={city}
+              required
             />
             <IndianStatesSelect state={state} setState={setState} />
           </div>
@@ -135,7 +138,7 @@ const NewAddressForm = ({ whichAddress, orderDetails, setOrderDetails, setNewAdd
               type="text"
               placeholder="Phone"
               className="form-control "
-              value={user.phoneNumber}
+              defaultValue={user.phoneNumber}
               disabled
             />
           </div>

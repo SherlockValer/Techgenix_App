@@ -27,6 +27,8 @@ import AddNewAddress from "./components/AddNewAddress.jsx";
 import Orders from "./components/Orders.jsx";
 import About from "./pages/About.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
+import { CartContextProvider } from "./context/CartContext.jsx";
+import { WishlistContextProvider } from "./context/WishlistContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -88,24 +90,26 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <GlobalContextProvider>
-      <ProductDataContextProvider>
-        <RouterProvider router={router} />
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition={Bounce}
-        />
-      </ProductDataContextProvider>
-    </GlobalContextProvider>
-  </StrictMode>
+  <GlobalContextProvider>
+    <ProductDataContextProvider>
+      <WishlistContextProvider>
+        <CartContextProvider>
+          <RouterProvider router={router} />
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+          />
+        </CartContextProvider>
+      </WishlistContextProvider>
+    </ProductDataContextProvider>
+  </GlobalContextProvider>
 );

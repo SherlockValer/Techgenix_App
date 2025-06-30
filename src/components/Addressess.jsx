@@ -1,17 +1,16 @@
 import useGlobalContext from "../context/globalContext";
-import { Link } from "react-router-dom";
 import AddNewAddress from "./AddNewAddress.jsx";
 
 const Addressess = () => {
-  const { user, setUser } = useGlobalContext();
+  const { user} = useGlobalContext();
   return (
     <>
       <p className="p-2 fw-bold text-danger fs-5">Addresses ({user?.addresses?.length})</p>
       <ul className="list-group p-2 ms-0">
         {user &&
           user.addresses &&
-          user.addresses.map((address) => (
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+          user.addresses.map((address, index) => (
+            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
               <div>
                 <p className="mb-2 fw-bold">{user.name}</p>
                 <p className="mb-2">

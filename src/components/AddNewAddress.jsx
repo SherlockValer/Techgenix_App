@@ -34,9 +34,7 @@ const AddNewAddress = () => {
 
   return (
     <>
-      <p className="p-2 my-3 fw-bold text-danger fs-5">
-        Add New Address
-      </p>
+      <p className="p-2 my-3 fw-bold text-danger fs-5">Add New Address</p>
 
       <form
         onSubmit={formHandler}
@@ -75,6 +73,7 @@ const AddNewAddress = () => {
             className="form-control "
             onChange={inputHandler}
             value={formData.label}
+            required
           />
         </div>
 
@@ -85,6 +84,7 @@ const AddNewAddress = () => {
             className="form-control "
             onChange={inputHandler}
             value={formData.street}
+            required
           />
         </div>
 
@@ -95,6 +95,7 @@ const AddNewAddress = () => {
             className="form-control "
             onChange={inputHandler}
             value={formData.city}
+            required
           />
           <IndianStatesSelect state={state} setState={setState} />
         </div>

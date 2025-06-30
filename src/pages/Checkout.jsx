@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { useCart } from "../hooks/useCart.js";
 import useGlobalContext from "../context/globalContext";
 import { useNavigate } from "react-router-dom";
 import NewAddressForm from "../components/NewAddressForm";
 import { FaPencilAlt } from "react-icons/fa";
 import useAddress from "../hooks/useAddress.js";
 import { toast } from "react-toastify";
+import { useCartContext } from "../context/CartContext.jsx";
 
 const Checkout = () => {
   const [cartData, setCartData] = useState({});
-  const { user, cartCount, setCartCount, API_URL } = useGlobalContext();
+  const { user, API_URL } = useGlobalContext();
+  const { setCartCount, cart, cartError } = useCartContext();
   const [whichAddress, setWhichAddress] = useState("new");
-  const [newAddress, setNewAddress] = useState(null)
-  const {addNewAddress} = useAddress()
+  const [newAddress, setNewAddress] = useState(null);
+  const { addNewAddress } = useAddress();
   const navigate = useNavigate();
 
   const [orderDetails, setOrderDetails] = useState({
@@ -25,7 +26,7 @@ const Checkout = () => {
   });
 
   // Fetch Cart details
-  const { cart, cartError } = useCart();
+
 
   useEffect(() => {
     setCartData(cart);
@@ -79,8 +80,8 @@ const Checkout = () => {
       .then((msg) => {
         if (msg.message) {
           emptyCart();
-          if(newAddress) {
-            addNewAddress(newAddress)
+          if (newAddress) {
+            addNewAddress(newAddress);
           }
           navigate(`/checkout/success/${msg.orderId}`);
         }
@@ -140,12 +141,17 @@ const Checkout = () => {
               </div>
 
               <div hidden={whichAddress === "saved" ? false : true}>
-                <select className="form-select" onChange={addressHandler} value={orderDetails.shippingAddress}>
+                <select
+                  className="form-select"
+                  onChange={addressHandler}
+                  value={orderDetails.shippingAddress}
+                >
                   <option value="">Select Address</option>
                   {user &&
                     user.addresses &&
-                    user.addresses.map((address) => (
+                    user.addresses.map((address, index) => (
                       <option
+                        key={index}
                         value={
                           address.label +
                           ", " +
@@ -178,9 +184,7 @@ const Checkout = () => {
                   >
                     <div>
                       <p className="mb-0 fw-bold">{user.name}</p>
-                      <p className="mb-0 ">
-                        {orderDetails.shippingAddress}
-                      </p>
+                      <p className="mb-0 ">{orderDetails.shippingAddress}</p>
                       <p className="mb-0 ">{user.phoneNumber}</p>
                     </div>
                   </div>
@@ -194,8 +198,6 @@ const Checkout = () => {
                   whichAddress={whichAddress}
                   setNewAddress={setNewAddress}
                 />
-
-
               </div>
             </div>
 
@@ -215,7 +217,7 @@ const Checkout = () => {
             {cartData &&
               cartData.items &&
               cartData.items.map((item) => (
-                <div>
+                <div key={item.productId._id}>
                   <div className="row p-2">
                     <div className="col-md-3">
                       <img
@@ -287,6 +289,10 @@ const Checkout = () => {
               <button
                 className="btn btn-danger btn-sm mb-2"
                 onClick={proceedBtnHandler}
+                disabled={
+                  orderDetails.shippingAddress === "" ||
+                  orderDetails.paymentMethod === ""
+                }
               >
                 Place Order
               </button>

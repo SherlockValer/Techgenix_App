@@ -5,7 +5,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
-  const { user, API_URL } = useGlobalContext();
+  const { API_URL } = useGlobalContext();
 
   useEffect(() => {
     setLoading(true);
@@ -68,7 +68,7 @@ const Orders = () => {
                   </div>
 
                   {order.orderItems.map((item) => (
-                    <div className="px-4 pt-4">
+                    <div className="px-4 pt-4" key={item.productId._id}>
                       <div className="row gap-2 p-2">
                         <div className="col-md-3">
                           <img
