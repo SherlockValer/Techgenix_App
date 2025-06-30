@@ -13,13 +13,13 @@ const AddNewAddress = () => {
     city: "",
     state: "",
     pincode: "",
-    country: "",
   });
 
   const [state, setState] = useState("");
 
   const inputHandler = (e) => {
     const { id, value } = e.target;
+    console.log(id)
     setFormData((prevData) => ({ ...prevData, [id]: value }));
   };
 
@@ -70,6 +70,7 @@ const AddNewAddress = () => {
           <input
             type="text"
             placeholder="Label"
+            id="label"
             className="form-control "
             onChange={inputHandler}
             value={formData.label}
@@ -81,6 +82,7 @@ const AddNewAddress = () => {
           <input
             type="text"
             placeholder="Street"
+            id="street"
             className="form-control "
             onChange={inputHandler}
             value={formData.street}
@@ -92,6 +94,7 @@ const AddNewAddress = () => {
           <input
             type="text"
             placeholder="City"
+            id="city"
             className="form-control "
             onChange={inputHandler}
             value={formData.city}
@@ -104,6 +107,7 @@ const AddNewAddress = () => {
           <input
             type="number"
             placeholder="Pincode"
+            id="pincode"
             className="form-control "
             maxLength={6}
             onChange={inputHandler}

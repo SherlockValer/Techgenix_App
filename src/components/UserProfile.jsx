@@ -39,7 +39,6 @@ const UserProfile = () => {
             type="text"
             placeholder=""
             className="form-control "
-            onChange={(e) => setLabel(e.target.value)}
             value={user.phoneNumber}
             disabled
           />
